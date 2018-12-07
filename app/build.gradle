@@ -42,7 +42,7 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:28.0.0'
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.firebaseui:firebase-ui-database:1.2.0'
-
+    implementation 'com.craftman.cardform:cardform:0.0.2'
 
 }
 apply plugin: 'com.google.gms.google-services'

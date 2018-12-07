@@ -4,17 +4,19 @@ import java.util.List;
 
 public class FoodOrders {
     private String name, phone, address, totalAmount, deliveryStatus;
+    private boolean amountPStatus;
     List<OrderDetail> ordersList;
 
     public FoodOrders() {
     }
 
-    public FoodOrders(String name, String phone, String address, String totalAmount, List<OrderDetail> ordersList) {
+    public FoodOrders(String name, String phone, String address, String totalAmount, boolean amountPaid, List<OrderDetail> ordersList) {
         this.name = name;
         this.phone = phone;
         this.address = address;
         this.totalAmount = totalAmount;
         this.ordersList = ordersList;
+        this.amountPStatus = amountPaid;
         this.deliveryStatus = "Processing...";
     }
 

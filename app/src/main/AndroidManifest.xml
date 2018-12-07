@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.muhammadfakhar.pro">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -30,7 +31,8 @@
         <activity android:name=".ListFoodActivity" />
         <activity android:name=".FoodDetails" />
         <activity android:name=".CartDetails" />
-        <activity android:name=".OrderDeliveryStatus"></activity>
+        <activity android:name=".OrderDeliveryStatus" />
+        <activity android:name=".PaymentMethod"></activity>
     </application>
 
 </manifest>
