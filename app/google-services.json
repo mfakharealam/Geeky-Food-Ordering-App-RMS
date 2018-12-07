@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "182927820354",
+    "firebase_url": "https://geekyfoods-4b918.firebaseio.com",
+    "project_id": "geekyfoods-4b918",
+    "storage_bucket": "geekyfoods-4b918.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:182927820354:android:2ab72a3b89c6e8fd",
+        "android_client_info": {
+          "package_name": "com.example.muhammadfakhar.pro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "182927820354-a21jf6gn24phrhch6t75alibokerpi0n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.muhammadfakhar.pro",
+            "certificate_hash": "58d28f0d72ce6620177be78ab3a6f24f3261748b"
+          }
+        },
+        {
+          "client_id": "182927820354-6ned3t645mtj21l7rmjvhfabi7ln3qk4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS7MyAjXg5rlM_xFBmmbEovLyl-xNH_w8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "182927820354-6ned3t645mtj21l7rmjvhfabi7ln3qk4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
