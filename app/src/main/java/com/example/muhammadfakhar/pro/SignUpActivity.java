@@ -48,6 +48,9 @@ public class SignUpActivity extends AppCompatActivity {
                 pass = passET.getText().toString();
                 email = emailET.getText().toString();
                 phoneno = phoneET.getText().toString();
+                if (!isEmailValid(email)){
+                    Toast.makeText(SignUpActivity.this, "Invalid Email Address", Toast.LENGTH_SHORT).show();
+                }
 
                 if (pass.isEmpty() || phoneno.isEmpty() || email.isEmpty())
                 {
@@ -98,5 +101,9 @@ public class SignUpActivity extends AppCompatActivity {
                 activeNetwork.isConnectedOrConnecting();
         // source android dev
         return isConnected;
+    }
+
+    boolean isEmailValid(CharSequence email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 }

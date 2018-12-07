@@ -41,7 +41,9 @@ public class PaymentMethod extends AppCompatActivity {
         CardForm cardForm = findViewById(R.id.paymentCard);
         Button payBtn = findViewById(R.id.btn_pay);
         TextView amountTV = findViewById(R.id.payment_amount);
-        amountTV.setText(totalAmount());
+        amountTV.setText("Rs. " + totalAmount());
+        payBtn.setText(totalAmount());
+
         payBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
