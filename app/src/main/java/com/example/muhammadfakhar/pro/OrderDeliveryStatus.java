@@ -1,11 +1,16 @@
 package com.example.muhammadfakhar.pro;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -41,13 +46,43 @@ public class OrderDeliveryStatus extends AppCompatActivity { // it's basically f
                 databaseReference.orderByChild("phone").equalTo(phone)
         ) {
             @Override
-            protected void populateViewHolder(OrderViewHolder viewHolder, FoodOrders model, int position) {
+            protected void populateViewHolder(OrderViewHolder viewHolder, FoodOrders model, final int position) {
                 viewHolder.getOrderIdTv().setText(firebaseRecyclerAdapter.getRef(position).getKey());
                 viewHolder.getOrderStatusTv().setText("Status: " + model.getDeliveryStatus());
                 viewHolder.getUserAddrTv().setText("Address: " + model.getAddress());
                 viewHolder.getUserPhoneTv().setText("Phone: " + model.getPhone());
+                viewHolder.getImageView().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (firebaseRecyclerAdapter.getItem(position).getDeliveryStatus()
+                                .equals("Processing..."))
+                        {
+                            deleteOrder(firebaseRecyclerAdapter.getRef(position).getKey());
+                        }
+                        else {
+                            Toast.makeText(OrderDeliveryStatus.this, "Order cannot be deleted now.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         };
         recyclerView.setAdapter(firebaseRecyclerAdapter);
+    }
+
+    private void deleteOrder(final String key) {
+        databaseReference.child(key).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(OrderDeliveryStatus.this, "Order " + key + " deleted.",
+                        Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(OrderDeliveryStatus.this, e.getMessage(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
