@@ -9,12 +9,12 @@ public class User implements Serializable {
     private String Password;
     private String Phone;
     private String Email;
-    private boolean staffMember;
+    private String staffMember;
 
     public User() {
     }
 
-    public User(String name, String password, String phone, String email, boolean staffMember) {
+    public User(String name, String password, String phone, String email, String staffMember) {
         Name = name;
         Password = password;
         Phone = phone;
@@ -54,11 +54,11 @@ public class User implements Serializable {
         Email = email;
     }
 
-    public boolean isStaffMember() {
+    public String isStaffMember() {
         return staffMember;
     }
 
-    public void setStaffMember(boolean staffMember) {
+    public void setStaffMember(String staffMember) {
         this.staffMember = staffMember;
     }
 }

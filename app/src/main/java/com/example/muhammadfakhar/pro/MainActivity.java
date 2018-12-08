@@ -30,8 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText phoneET, passET;
     private FButton signIn, signUp;
     private ProgressBar progressBar;
-    private String pass, phoneno, remPhone, remPass, remName, remMail;
-    private boolean remStaff;
+    private String pass, phoneno, remPhone, remPass, remName, remMail, remStaff;
     private CheckBox remCB; // by default it is checked
 
     @Override
