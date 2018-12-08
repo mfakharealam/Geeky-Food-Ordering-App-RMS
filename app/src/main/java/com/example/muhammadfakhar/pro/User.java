@@ -9,39 +9,17 @@ public class User implements Serializable {
     private String Password;
     private String Phone;
     private String Email;
+    private boolean staffMember;
 
     public User() {
     }
 
-    public User(String name, String password, String phone) {
-        Name = name;
-        Password = password;
-        Phone = phone;
-    }
-
-    public User(String name, String password, String phone, String email) {
+    public User(String name, String password, String phone, String email, boolean staffMember) {
         Name = name;
         Password = password;
         Phone = phone;
         Email = email;
-    }
-
-    public String getPhone() {
-        return Phone;
-    }
-
-
-    public String getEmail() {
-        return Email;
-    }
-
-    public void setEmail(String email) {
-        Email = email;
-    }
-
-
-    public void setPhone(String phone) {
-        Phone = phone;
+        this.staffMember = staffMember;
     }
 
     public String getName() {
@@ -58,5 +36,29 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         Password = password;
+    }
+
+    public String getPhone() {
+        return Phone;
+    }
+
+    public void setPhone(String phone) {
+        Phone = phone;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
+    }
+
+    public boolean isStaffMember() {
+        return staffMember;
+    }
+
+    public void setStaffMember(boolean staffMember) {
+        this.staffMember = staffMember;
     }
 }

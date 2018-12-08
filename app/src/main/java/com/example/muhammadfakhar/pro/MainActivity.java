@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private FButton signIn, signUp;
     private ProgressBar progressBar;
     private String pass, phoneno, remPhone, remPass, remName, remMail;
+    private boolean remStaff;
     private CheckBox remCB; // by default it is checked
 
     @Override
@@ -58,11 +59,12 @@ public class MainActivity extends AppCompatActivity {
         remPass = Paper.book().read("User Password");
         remName = Paper.book().read("User Name");
         remMail = Paper.book().read("User Email");
+        remStaff = Paper.book().read("Staff");
         if (remPhone != null && remPass != null)
         {
             /*phoneET.setText(remPhone);
             passET.setText(remPass);*/
-            User aUser = new User(remName, remPass, remPhone, remMail);
+            User aUser = new User(remName, remPass, remPhone, remMail, remStaff);
             UserInstance.currUser = aUser;
             Intent intent = new Intent(MainActivity.this, Home.class);
             startActivity(intent);
@@ -95,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
                                     Paper.book().write("User Phone", phoneno);
                                     Paper.book().write("User Name", aUser.getName());
                                     Paper.book().write("User Email", aUser.getEmail());
+                                    Paper.book().write("Staff", aUser.isStaffMember());
                                 }
                                 if (aUser.getPassword().equals(pass)) {
                                     aUser.setPhone(phoneno);
