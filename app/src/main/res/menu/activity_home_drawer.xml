@@ -23,6 +23,10 @@
             android:title="Orders" />
 
         <item
+            android:id="@+id/galleryNavBtn"
+            android:icon="@drawable/gall"
+            android:title="Gallery" />
+        <item
             android:id="@+id/feedBackItem"
             android:icon="@drawable/feedbackicon"
             android:title="Feedback" />

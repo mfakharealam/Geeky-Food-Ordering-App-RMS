@@ -151,6 +151,11 @@ public class Home extends AppCompatActivity
             Intent intent = new Intent(Home.this, OrderDeliveryStatus.class);
             startActivity(intent);
         }
+        else if (id == R.id.galleryNavBtn)
+        {
+            Intent intent = new Intent(Home.this, ActivityGallery.class);
+            startActivity(intent);
+        }
         else if (id == R.id.feedBackItem)
         {
             new SendMailTask(this).execute();

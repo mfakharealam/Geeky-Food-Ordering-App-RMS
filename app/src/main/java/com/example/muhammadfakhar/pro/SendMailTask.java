@@ -25,7 +25,7 @@ public class SendMailTask extends AsyncTask {
 
         String[] TO = {"fakhar571@gmail.com"};
         String[] CC = {UserInstance.currUser.getEmail()};
-        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
         emailIntent.setData(Uri.parse("mailto:"));
         emailIntent.setType("text/plain");
 
