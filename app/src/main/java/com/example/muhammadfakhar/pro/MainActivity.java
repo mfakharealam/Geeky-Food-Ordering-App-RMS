@@ -26,7 +26,6 @@ import io.paperdb.Paper;
 public class MainActivity extends AppCompatActivity {
 
     private EditText phoneET, passET;
-    private ConnectivityChangeReceiver connectivityChangeReceiver;
     private FButton signIn, signUp;
     private ProgressBar progressBar;
     private String pass, phoneno, remPhone, remPass, remName, remMail, remStaff;
@@ -46,10 +45,6 @@ public class MainActivity extends AppCompatActivity {
         signIn.setButtonColor(Color.parseColor("#ffffff"));
         signUp.setButtonColor(Color.parseColor("#ffffff"));
 
-        ///
-
-        connectivityChangeReceiver = new ConnectivityChangeReceiver();
-        ///
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         final DatabaseReference userTable = firebaseDatabase.getReference("User"); // from firebase
 
@@ -83,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Empty Fields!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (connectivityChangeReceiver.isConnected(getApplicationContext())) {
+                if (ConnectivityChangeReceiver.getInstance().isConnected(getApplicationContext())) {
                     progressBar.setVisibility(View.VISIBLE);
                     userTable.addValueEventListener(new ValueEventListener() {
                         @Override

@@ -11,6 +11,19 @@ import com.example.muhammadfakhar.pro.Service.CheckConnection;
 
 public class ConnectivityChangeReceiver extends BroadcastReceiver {
 
+    private static ConnectivityChangeReceiver INSTANCE = null;
+
+    // other instance variables can be here
+
+    private ConnectivityChangeReceiver() {}
+
+    public static ConnectivityChangeReceiver getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new ConnectivityChangeReceiver();
+        }
+        return(INSTANCE);
+    }
+
     @Override
     public void onReceive(Context context, Intent intent) {
         // an Intent broadcast.

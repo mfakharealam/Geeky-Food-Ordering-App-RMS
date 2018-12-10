@@ -98,7 +98,7 @@ public class Home extends AppCompatActivity
         bindMenu();
         // service
 
-        startService(new Intent(Home.this, Listening.class));
+        startService(new Intent(Home.this, Listening.class)); // did for notifications
 
     }
 
@@ -106,6 +106,11 @@ public class Home extends AppCompatActivity
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Cuisines, MenuViewHolder>(Cuisines.class, R.layout.menu_item, MenuViewHolder.class, cuisinesRef) {
             @Override
             protected void populateViewHolder(MenuViewHolder viewHolder, Cuisines model, int position) {
+                if (!ConnectivityChangeReceiver.getInstance().isConnected(getApplicationContext()))
+                {
+                    Toast.makeText(getApplicationContext(), "No Internet Connection!", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 viewHolder.cuisineName.setText(model.getName());
                 Picasso.with(getBaseContext()).load(model.getImage()).into(viewHolder.imageView);
                 final Cuisines cuisines = model;
@@ -151,8 +156,12 @@ public class Home extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
-        if (id == R.id.nav_menu)
+        if (!ConnectivityChangeReceiver.getInstance().isConnected(getApplicationContext()))
+        {
+            Toast.makeText(this, "No Internet Connection!", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        else if (id == R.id.nav_menu)
         {
 
         }

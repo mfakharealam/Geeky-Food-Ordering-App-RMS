@@ -3,7 +3,10 @@ package com.example.muhammadfakhar.pro.Service;
 import android.app.IntentService;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.Toast;
+
+import com.example.muhammadfakhar.pro.ToastDisplay;
 
 public class CheckConnection extends IntentService {
 
@@ -12,8 +15,10 @@ public class CheckConnection extends IntentService {
      *
      * @param name Used to name the worker thread, important only for debugging.
      */
+    private Handler handler;
     public CheckConnection(String name) {
         super(name);
+        handler = new Handler();
     }
 
     @Override
@@ -23,11 +28,11 @@ public class CheckConnection extends IntentService {
         // your code
         if (isNetworkConnected)
         {
-            Toast.makeText(CheckConnection.this, "Connected!", Toast.LENGTH_SHORT).show();
+            handler.post(new ToastDisplay(this, "Internet is Connected!"));
         }
         else
         {
-            Toast.makeText(CheckConnection.this, "No Connection!", Toast.LENGTH_SHORT).show();
+            handler.post(new ToastDisplay(this, "No Internet Connection!"));
         }
     }
 

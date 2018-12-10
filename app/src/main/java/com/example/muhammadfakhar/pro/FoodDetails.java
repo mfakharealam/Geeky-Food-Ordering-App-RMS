@@ -75,6 +75,13 @@ public class FoodDetails extends AppCompatActivity {
         foodRef.child(foodId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if (!ConnectivityChangeReceiver.getInstance().isConnected(getApplicationContext()))
+                {
+                    Toast.makeText(getApplicationContext(), "No Internet Connection!", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 currFoodItem = dataSnapshot.getValue(FoodItem.class);
 
                 Picasso.with(getBaseContext()).load(currFoodItem.getImage()).into(imageView);

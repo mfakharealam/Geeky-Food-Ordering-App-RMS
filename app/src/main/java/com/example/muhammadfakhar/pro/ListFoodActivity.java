@@ -158,6 +158,11 @@ public class ListFoodActivity extends AppCompatActivity {
         {
             @Override
             protected void populateViewHolder(FoodViewHolder viewHolder, FoodItem model, int position) {
+                if (!ConnectivityChangeReceiver.getInstance().isConnected(getApplicationContext()))
+                {
+                    Toast.makeText(getApplicationContext(), "No Internet Connection!", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 viewHolder.foodName.setText(model.getName());
                 Picasso.with(getBaseContext()).load(model.getImage()).into(viewHolder.imageView);
                 final FoodItem curr = model;
