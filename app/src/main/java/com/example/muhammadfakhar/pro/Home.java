@@ -18,10 +18,12 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.muhammadfakhar.pro.Service.Listening;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.common.images.ImageRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
@@ -94,6 +96,9 @@ public class Home extends AppCompatActivity
         nameTv.setText(UserInstance.currUser.getName());
         emailTV.setText(UserInstance.currUser.getEmail());
         bindMenu();
+        // service
+
+        startService(new Intent(Home.this, Listening.class));
 
     }
 

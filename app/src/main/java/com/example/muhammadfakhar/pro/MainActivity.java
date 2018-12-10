@@ -1,6 +1,5 @@
 package com.example.muhammadfakhar.pro;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -12,7 +11,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -28,6 +26,7 @@ import io.paperdb.Paper;
 public class MainActivity extends AppCompatActivity {
 
     private EditText phoneET, passET;
+    private ConnectivityChangeReceiver connectivityChangeReceiver;
     private FButton signIn, signUp;
     private ProgressBar progressBar;
     private String pass, phoneno, remPhone, remPass, remName, remMail, remStaff;
@@ -47,6 +46,10 @@ public class MainActivity extends AppCompatActivity {
         signIn.setButtonColor(Color.parseColor("#ffffff"));
         signUp.setButtonColor(Color.parseColor("#ffffff"));
 
+        ///
+
+        connectivityChangeReceiver = new ConnectivityChangeReceiver();
+        ///
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         final DatabaseReference userTable = firebaseDatabase.getReference("User"); // from firebase
 
@@ -59,8 +62,7 @@ public class MainActivity extends AppCompatActivity {
         remName = Paper.book().read("User Name");
         remMail = Paper.book().read("User Email");
         remStaff = Paper.book().read("Staff");
-        if (remPhone != null && remPass != null)
-        {
+        if (remPhone != null && remPass != null) {
             /*phoneET.setText(remPhone);
             passET.setText(remPass);*/
             User aUser = new User(remName, remPass, remPhone, remMail, remStaff);
@@ -77,12 +79,11 @@ public class MainActivity extends AppCompatActivity {
                 pass = passET.getText().toString();
                 phoneno = phoneET.getText().toString();
 
-                if (pass.isEmpty() || phoneno.isEmpty())
-                {
+                if (pass.isEmpty() || phoneno.isEmpty()) {
                     Toast.makeText(MainActivity.this, "Empty Fields!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (checkConn() == true) {
+                if (connectivityChangeReceiver.isConnected(getApplicationContext())) {
                     progressBar.setVisibility(View.VISIBLE);
                     userTable.addValueEventListener(new ValueEventListener() {
                         @Override
@@ -90,8 +91,7 @@ public class MainActivity extends AppCompatActivity {
                             progressBar.setVisibility(View.INVISIBLE);
                             if (dataSnapshot.child(phoneno).exists()) {
                                 User aUser = dataSnapshot.child(phoneno).getValue(User.class);
-                                if (remCB.isChecked())
-                                {
+                                if (remCB.isChecked()) {
                                     Paper.book().write("User Password", pass);
                                     Paper.book().write("User Phone", phoneno);
                                     Paper.book().write("User Name", aUser.getName());
@@ -117,9 +117,7 @@ public class MainActivity extends AppCompatActivity {
 
                         }
                     });
-                }
-                else
-                {
+                } else {
                     Toast.makeText(MainActivity.this, "No Internet Connection!", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -135,15 +133,4 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public boolean checkConn()
-    {
-        ConnectivityManager cm =
-                (ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        boolean isConnected = activeNetwork != null &&
-                activeNetwork.isConnectedOrConnecting();
-        // source android dev
-        return isConnected;
-    }
 }

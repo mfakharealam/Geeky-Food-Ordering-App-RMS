@@ -84,7 +84,7 @@ public class PaymentMethod extends AppCompatActivity {
                             //Dismiss once everything is OK.
                             FoodOrders foodOrders = new FoodOrders(currUser.getName(), currUser.getPhone(),
                                     eTAddr.getText().toString(), totalAmount(), true, cartList);
-                            // adding to firebase too!
+                            // adding to firebase
                             databaseReference.child(String.valueOf(System.currentTimeMillis())).setValue(foodOrders);
                             new Database(getBaseContext()).emptyCart();
                             Toast.makeText(PaymentMethod.this, "Order is Placed!", Toast.LENGTH_SHORT).show();

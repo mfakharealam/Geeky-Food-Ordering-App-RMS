@@ -35,8 +35,13 @@ public class OrderDeliveryStatus extends AppCompatActivity { // it's basically f
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(OrderDeliveryStatus.this);
         recyclerView.setLayoutManager(layoutManager);
-
-        showAllOrders(UserInstance.currUser.getPhone());
+        if (getIntent().getStringExtra("User Phone") == null) {
+            showAllOrders(UserInstance.currUser.getPhone());
+        }
+        else
+        {
+            showAllOrders(getIntent().getStringExtra("User Phone"));
+        }
     }
 
     private void showAllOrders(final String phone)
@@ -51,6 +56,7 @@ public class OrderDeliveryStatus extends AppCompatActivity { // it's basically f
                 viewHolder.getOrderStatusTv().setText("Status: " + model.getDeliveryStatus());
                 viewHolder.getUserAddrTv().setText("Address: " + model.getAddress());
                 viewHolder.getUserPhoneTv().setText("Phone: " + model.getPhone());
+                viewHolder.getImageView().setImageResource(R.drawable.ic_delete);
                 viewHolder.getImageView().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
