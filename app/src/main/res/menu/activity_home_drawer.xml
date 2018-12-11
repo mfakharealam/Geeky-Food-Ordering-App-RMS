@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
@@ -30,6 +31,10 @@
             android:id="@+id/feedBackItem"
             android:icon="@drawable/feedbackicon"
             android:title="Feedback" />
+        <item
+            android:id="@+id/sub_Nav"
+            android:icon="@drawable/sub"
+            android:title="Newsletter Subscription" />
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/logout"

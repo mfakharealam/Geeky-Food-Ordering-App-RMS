@@ -69,7 +69,7 @@ public class SignUpActivity extends AppCompatActivity {
                             }
                             else
                             {
-                                User nUser = new User(pname, pass, phoneno, email, "false");
+                                User nUser = new User(pname, pass, phoneno, email, "false", "false");
                                 userTable.child(phoneno).setValue(nUser);
                                 UserInstance.currUser = nUser;
                                 Intent intent = new Intent(SignUpActivity.this, Home.class);

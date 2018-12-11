@@ -75,53 +75,6 @@ public class CartDetails extends AppCompatActivity {
         });
         showOrdersList();
     }
-/*
-
-    private void alertDialogForAddress()
-    {
-        final EditText eTAddr = new EditText(CartDetails.this);
-        eTAddr.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
-        final AlertDialog dialog = new AlertDialog.Builder(CartDetails.this)
-                .setView(eTAddr)
-                .setIcon(R.drawable.cart)
-                .setMessage("Enter Your Current Address:")
-                .setTitle("Where to Deliver?")
-                .setPositiveButton(android.R.string.ok, null) //Set to null. We override the onclick
-                .setNegativeButton(android.R.string.cancel, null)
-                .create();
-
-        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-
-            @Override
-            public void onShow(DialogInterface dialogInterface) {
-
-                Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
-                button.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View view) {
-                        // TODO Do something
-                        if (eTAddr.getText().toString().length() > 0)
-                        {
-                            //Dismiss once everything is OK.
-                            FoodOrders foodOrders = new FoodOrders(currUser.getName(), currUser.getPhone(),
-                                    eTAddr.getText().toString(), textView.getText().toString(), true, cartList);
-                            // adding to firebase too!
-                            databaseReference.child(String.valueOf(System.currentTimeMillis())).setValue(foodOrders);
-                            new Database(getBaseContext()).emptyCart();
-                            Toast.makeText(CartDetails.this, "Order is Placed!", Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
-                            finish();
-                        }
-
-                    }
-                });
-            }
-        });
-        dialog.show();
-    }
-*/
-
     private void showOrdersList()
     {
         cartList = new Database(this).getOrderedItems();

@@ -44,6 +44,6 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-database:1.2.0'
     implementation 'com.craftman.cardform:cardform:0.0.2'
     implementation 'com.google.android.gms:play-services-ads:15.0.1'
-
+    implementation 'com.github.yesidlazaro:GmailBackground:1.2.0'
 }
 apply plugin: 'com.google.gms.google-services'

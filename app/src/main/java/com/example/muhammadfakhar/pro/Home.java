@@ -1,9 +1,12 @@
 package com.example.muhammadfakhar.pro;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -15,6 +18,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,8 +30,12 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.common.images.ImageRequest;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import io.paperdb.Paper;
@@ -48,7 +58,7 @@ public class Home extends AppCompatActivity
         toolbar.setTitle("Menu");
         setSupportActionBar(toolbar);
 
-        //
+        // admob
         AdView adView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().addTestDevice("769CDCA883559A03962D60DA49C6A763")
                 .build();
@@ -184,6 +194,10 @@ public class Home extends AppCompatActivity
         {
             new SendMailTask(this).execute();
         }
+        else if (id == R.id.sub_Nav)
+        {
+            alertDialogForSub();
+        }
         else if (id == R.id.nav_logout)
         {
             Paper.book().destroy(); // destroy the remembered
@@ -195,5 +209,47 @@ public class Home extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    private void alertDialogForSub()
+    {
+        final DatabaseReference databaseReference = firebaseDatabase.getReference("User");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        final AlertDialog dialog = new AlertDialog.Builder(this)
+                .setIcon(R.drawable.sub)
+                .setTitle("Want to make your inbox tasty? Subscribe!")
+                .setPositiveButton("Done!", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (UserInstance.currUser.getSubscriptionStatus().equals("false"))
+                        {
+                            UserInstance.currUser.setSubscriptionStatus("true");
+                            final DatabaseReference databaseReference = firebaseDatabase.getReference("User");
+                            databaseReference.child(UserInstance.currUser.getPhone())
+                                    .setValue(UserInstance.currUser); // updated at firebase
+                            Toast.makeText(Home.this, "Successfully Subscribed!", Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            Toast.makeText(Home.this, "Already Subscribed!", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                })
+                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create();
+        dialog.show();
     }
 }

@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText phoneET, passET;
     private FButton signIn, signUp;
     private ProgressBar progressBar;
-    private String pass, phoneno, remPhone, remPass, remName, remMail, remStaff;
+    private String pass, phoneno;
     private CheckBox remCB; // by default it is checked
 
     @Override
@@ -52,15 +52,8 @@ public class MainActivity extends AppCompatActivity {
 
         Paper.init(this);
 
-        remPhone = Paper.book().read("User Phone");
-        remPass = Paper.book().read("User Password");
-        remName = Paper.book().read("User Name");
-        remMail = Paper.book().read("User Email");
-        remStaff = Paper.book().read("Staff");
-        if (remPhone != null && remPass != null) {
-            /*phoneET.setText(remPhone);
-            passET.setText(remPass);*/
-            User aUser = new User(remName, remPass, remPhone, remMail, remStaff);
+        User aUser = Paper.book().read("User");
+        if (aUser != null) {
             UserInstance.currUser = aUser;
             Intent intent = new Intent(MainActivity.this, Home.class);
             startActivity(intent);
@@ -87,11 +80,7 @@ public class MainActivity extends AppCompatActivity {
                             if (dataSnapshot.child(phoneno).exists()) {
                                 User aUser = dataSnapshot.child(phoneno).getValue(User.class);
                                 if (remCB.isChecked()) {
-                                    Paper.book().write("User Password", pass);
-                                    Paper.book().write("User Phone", phoneno);
-                                    Paper.book().write("User Name", aUser.getName());
-                                    Paper.book().write("User Email", aUser.getEmail());
-                                    Paper.book().write("Staff", aUser.isStaffMember());
+                                    Paper.book().write("User", aUser);
                                 }
                                 if (aUser.getPassword().equals(pass)) {
                                     aUser.setPhone(phoneno);
